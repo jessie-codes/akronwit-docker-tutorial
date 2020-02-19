@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  postgres:
+    image: "postgres:9"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=dockertest
+      - POSTGRES_PASSWORD=dockertest
+      - POSTGRES_DB=dockertest
+  python:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    ports:
+      - "3000:3000"
